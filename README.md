@@ -1,4 +1,4 @@
-# 🏦 Aegis Banking Microservices Application
+# 🏦 Aegis Capital Banking Microservices Application
 
 A full-stack banking application built with a **microservices architecture** using **Spring Boot** (Backend) and **Vanilla HTML/CSS/JS** (Frontend). The system provides user authentication with MFA, bank account management, and transaction processing across three independent services.
 
