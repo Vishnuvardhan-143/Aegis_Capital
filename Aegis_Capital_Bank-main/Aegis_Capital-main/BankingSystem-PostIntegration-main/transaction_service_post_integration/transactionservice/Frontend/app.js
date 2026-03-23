@@ -108,8 +108,8 @@ async function handleDeposit(e) {
         }
 
         const tx = await resp.json();
-        if (tx.status === 'FAILED') {
-            showMessage('Deposit failed. Please try again.', 'error');
+        if (tx.status !== 'SUCCESS') {
+            showMessage(`Deposit failed: ${tx.status}`, 'error');
         } else {
             showMessage(`Successfully deposited ₹${amount}!`, 'success');
             document.getElementById('depositForm').reset();
@@ -148,8 +148,8 @@ async function handleWithdraw(e) {
         }
 
         const tx = await resp.json();
-        if (tx.status === 'FAILED') {
-            showMessage('Withdrawal failed. Insufficient balance or server error.', 'error');
+        if (tx.status !== 'SUCCESS') {
+            showMessage(`Withdrawal failed: ${tx.status}`, 'error');
         } else {
             showMessage(`Successfully withdrew ₹${amount}!`, 'success');
             document.getElementById('withdrawForm').reset();
@@ -196,8 +196,8 @@ async function handleTransferOwn(e) {
         }
 
         const tx = await resp.json();
-        if (tx.status === 'FAILED') {
-            showMessage('Transfer failed. Insufficient balance or server error.', 'error');
+        if (tx.status !== 'SUCCESS') {
+            showMessage(`Transfer failed: ${tx.status}`, 'error');
         } else {
             showMessage(`Successfully transferred ₹${amount}!`, 'success');
             document.getElementById('transferOwnForm').reset();
@@ -263,8 +263,8 @@ async function handleTransferExternal(e) {
         }
 
         const tx = await resp.json();
-        if (tx.status === 'FAILED') {
-            showMessage('Transfer failed. Insufficient balance or server error.', 'error');
+        if (tx.status !== 'SUCCESS') {
+            showMessage(`Transfer failed: ${tx.status}`, 'error');
         } else {
             showMessage(`Successfully transferred ₹${amount} to Acc: ${accNo}!`, 'success');
             document.getElementById('transferExternalForm').reset();
