@@ -69,6 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 2b) Back to Dashboard button
+    const backToDashboardBtn = document.getElementById('backToDashboardBtn');
+    if (backToDashboardBtn) {
+        backToDashboardBtn.addEventListener('click', () => {
+            window.location.href = 'http://localhost:5173/dashboard.html';
+        });
+    }
+
     // 3) Token missing → Unauth state & return
     if (!token) {
         mainContainer?.classList.add('hidden');
