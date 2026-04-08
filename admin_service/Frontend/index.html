@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Admin | Aegis Capital</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="logo-container">
+            <div class="logo-icon">A</div>
+            <div class="logo-text">Aegis Capital</div>
+        </div>
+        
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" id="navUsers">
+                    <span>👥</span> Users Directory
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" id="navAccounts">
+                    <span>🏦</span> Accounts Overview
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer" style="margin-top: auto;">
+            <a href="#" id="logoutBtn" class="nav-link danger">
+                <span>🚪</span> Sign Out
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="welcome-text">
+                <h1>Digital Asset Command</h1>
+                <p>Global banking administrative oversight and risk management.</p>
+            </div>
+            <div class="admin-badge">
+                <span id="adminEmail">admin@aegis.bank</span>
+                <span style="color:var(--text-secondary)">|</span>
+                <span style="color:var(--gold-1)">★ MASTER ADMIN</span>
+            </div>
+        </header>
+
+        <!-- Stats Overview -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Total Registered Users</span>
+                <span class="stat-value" id="statUsers">0</span>
+                <div class="stat-trend trend-up">
+                    <span>▲</span> <span>Active client base</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Active Bank Accounts</span>
+                <span class="stat-value" id="statAccounts">—</span>
+                <div class="stat-trend trend-up">
+                    <span>▲</span> <span>Live account ledger</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">System Liquidity</span>
+                <span class="stat-value" id="statLiquidity">...</span>
+                <div class="stat-trend trend-down">
+                    <span>▼</span> <span style="color:var(--error)">Total AUM across all accounts</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interest Action Bar -->
+        <section class="interest-action-bar" style="margin-bottom: 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <button class="btn btn-success" id="applyInterestAllBtn" onclick="applyMonthlyInterest()">
+                💰 Apply Interest to All Accounts
+            </button>
+            <button class="btn btn-warning" id="applyInterestSelectedBtn" onclick="applyInterestToSelected()" style="display: none;">
+                🎯 Apply Interest to Selected (<span id="selectedCount">0</span>)
+            </button>
+            <span id="interestResultMsg" style="font-size: 13px; color: var(--text-secondary); display: none;"></span>
+        </section>
+
+        <div id="messageBox"></div>
+
+        <!-- Users Section -->
+        <section id="usersSection" class="content-card">
+            <div class="card-header">
+                <h3>Global User Registry</h3>
+                <div class="badge badge-success">● SYSTEM ONLINE</div>
+            </div>
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th style="width:40px;"><input type="checkbox" id="selectAllUsers" onclick="toggleSelectAll(this)" title="Select All"></th>
+                        <th>Digital ID</th>
+                        <th>Full Legal Name</th>
+                        <th>Primary Email</th>
+                        <th>PAN Verification</th>
+                        <th>MFA Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated via JS -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- All Accounts Overview Section -->
+        <section id="allAccountsSection" class="content-card hidden">
+            <div class="card-header">
+                <h3>🏦 Accounts Overview — All Active Accounts</h3>
+                <div class="badge badge-success">● LIVE DATA</div>
+            </div>
+            <table id="allAccountsTable">
+                <thead>
+                    <tr>
+                        <th>Account ID</th>
+                        <th>Routing Number</th>
+                        <th>IFSC Code</th>
+                        <th>Institution</th>
+                        <th>Account Holder</th>
+                        <th>Asset Balance</th>
+                        <th>Member Since</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated via JS -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Accounts Detail Section (per-user portfolio drill-down) -->
+        <section id="accountsSection" class="content-card hidden">
+            <div class="card-header">
+                <h3>Account Portfolios: <span id="currentAccountsUserEmail" style="color:var(--gold-1)"></span></h3>
+                <button class="btn btn-primary" id="backToUsersBtn">← Return to Registry</button>
+            </div>
+            <table id="accountsTable">
+                <thead>
+                    <tr>
+                        <th>Account ID</th>
+                        <th>Routing Number</th>
+                        <th>IFSC Code</th>
+                        <th>Institution</th>
+                        <th>Asset Balance</th>
+                        <th>Risk Mitigation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated via JS -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Transactions Ledger Section -->
+        <section id="transactionsSection" class="content-card hidden">
+            <div class="card-header">
+                <h3>Asset Ledger: <span id="currentTransactionsAccNo" style="color:var(--gold-1)"></span></h3>
+                <button class="btn btn-primary" id="backToAccountsBtn">← Return to Portfolio</button>
+            </div>
+            <table id="transactionsTable">
+                <thead>
+                    <tr>
+                        <th>Reference ID</th>
+                        <th>Type</th>
+                        <th>Counterparty</th>
+                        <th>Amount</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated via JS -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>

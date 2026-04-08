@@ -1,0 +1,14 @@
+server:
+  port: 5065
+
+jwt:
+  # 256-bit secret key (Base64-encoded) for HS256 — must match Auth Service secret
+  secret: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"
+
+# Endpoints for internal services
+auth-service:
+  url: ${AUTH_SERVICE_URL:http://localhost:5052}
+account-service:
+  url: ${ACCOUNT_SERVICE_URL:http://localhost:5050}
+transaction-service:
+  url: ${TRANSACTION_SERVICE_URL:http://localhost:5005}
